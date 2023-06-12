@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+model FoodCourt {
+  id       Int    @id @default(autoincrement())
+  name     String
+  location String
+  foods    Food[]
+}
+
+model Food {
+  id          Int       @id @default(autoincrement())
+  name        String
+  price       Float
+  foodCourt   FoodCourt @relation(fields: [foodCourtId], references: [id])
+  foodCourtId Int
+}
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://root:xablau@localhost:3306/pracasdealimentacao"
+}
